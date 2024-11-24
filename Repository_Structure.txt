@@ -1,0 +1,17 @@
+pretax-calculator-pro/
+├── assets/
+│   ├── css/
+│   │   └── styles.css        # Extracted styles from index.html
+│   ├── js/
+│   │   └── calculator.js     # Extracted JavaScript from index.html
+│   └── img/                  # For any future images/icons
+├── docs/
+│   ├── README.html          # HTML documentation
+│   └── screenshots/         # For documentation images
+├── src/
+│   └── index.html          # Main application file (cleaned version)
+├── tests/                  # For future unit tests
+│   └── calculator.test.js
+├── .gitignore             # Git ignore file
+├── LICENSE                # MIT License file
+└── README.md             # Main documentation
