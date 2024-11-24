@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Reverse Sales Tax Calculator</title>
+    <style>
+        /* Global Dark Theme Styling */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #FFFFFF;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #1C1C1C;
+            padding: 20px;
+            text-align: center;
+            color: #FFDD44;
+            font-size: 24px;
+            border-bottom: 2px solid #FF5733;
+        }
+
+        /* Main Content Container */
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Calculator Container */
+        .calculator-container {
+            background-color: #1C1C1C;
+            border: 2px solid #FFDD44;
+            padding: 20px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            margin: 20px;
+        }
+
+        .calculator-container h2 {
+            color: #FF5733;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #FFDD44;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #2e2e2e;
+            border: 2px solid #FF5733;
+            color: #fff;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF5733;
+            border: none;
+            color: #FFFFFF;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #FF8C66;
+        }
+
+        .result {
+            color: #FFDD44;
+            font-size: 18px;
+            margin-top: 20px;
+            line-height: 1.6;
+            padding: 10px;
+            border: 2px solid #FF5733;
+            border-radius: 5px;
+            background-color: #2e2e2e;
+        }
+
+        #calculationSteps {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #FF5733;
+            border-radius: 5px;
+            background-color: #2e2e2e;
+        }
+
+        .step {
+            margin-bottom: 10px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #1C1C1C;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #FFDD44;
+            border-top: 2px solid #FF5733;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            main {
+                padding: 20px;
+            }
+
+            .calculator-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        Reverse Sales Tax Calculator
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Calculator Section -->
+        <div class="calculator-container">
+            <h2>Calculate Price Before Tax</h2>
+            <form id="reverseTaxForm">
+                <label for="totalPrice">Price with Tax:</label>
+                <input type="number" id="totalPrice" placeholder="Enter price with tax" required>
+
+                <label for="taxRate">Sales Tax (%):</label>
+                <input type="number" id="taxRate" placeholder="Enter tax rate" required>
+
+                <button type="button" onclick="calculateReverseTax()">Calculate</button>
+            </form>
+
+            <div id="result" class="result"></div>
+
+            <div id="calculationSteps">
+                <div class="step">Step 1: Enter the total price with tax and the sales tax percentage.</div>
+                <div class="step">Step 2: Click on the 'Calculate' button to see the results.</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        
+    </footer>
+
+    <!-- Calculator Script -->
+    <script>
+        function calculateReverseTax() {
+            const totalPrice = parseFloat(document.getElementById('totalPrice').value);
+            const taxRate = parseFloat(document.getElementById('taxRate').value);
+
+            if (isNaN(totalPrice) || isNaN(taxRate) || totalPrice <= 0 || taxRate < 0) {
+                document.getElementById('result').textContent = "Please enter valid values.";
+                return;
+            }
+
+            const taxRateDecimal = taxRate / 100;
+            const listPrice = totalPrice / (1 + taxRateDecimal);
+            const salesTaxAmount = listPrice * taxRateDecimal;
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <strong>Result:</strong><br>
+                Price before Tax: $${listPrice.toFixed(2)}<br>
+                Sales Tax Amount: $${salesTaxAmount.toFixed(2)}<br>
+                Total Price with Tax: $${totalPrice.toFixed(2)}
+            `;
+        }
+    </script>
+
+</body>
+</html>
